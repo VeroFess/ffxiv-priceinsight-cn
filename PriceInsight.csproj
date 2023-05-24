@@ -36,7 +36,7 @@
 
 	<!-- Dalamud Configuration -->
 	<PropertyGroup>
-		<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+		<DalamudLibPath>D:\Games\FFXIV\Roaming\addon\Hooks\dev\</DalamudLibPath>
 	</PropertyGroup>
 
 	<!-- Assembly Reference Locations -->
