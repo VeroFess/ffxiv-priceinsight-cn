@@ -3,7 +3,7 @@
   "Name": "Price Insight",
   "InternalName": "PriceInsight",
   "AssemblyVersion": "2.4.0.0",
-  "Description": "(国区特供, 没有翻译) Whenever you mouseover an item, it will show you the NQ/HQ marketboard prices at the bottom as well as the most recent purchase.\nPrices are retrieved from Universalis.app and cached for 90 minutes.\nTo refresh a price you can tap Alt while hovering over an item.\n",
+  "Description": "(国区特供, 翻译完成, 解决了查价网站被*的问题) Whenever you mouseover an item, it will show you the NQ/HQ marketboard prices at the bottom as well as the most recent purchase.\nPrices are retrieved from Universalis.app and cached for 90 minutes.\nTo refresh a price you can tap Alt while hovering over an item.\n",
   "ApplicableVersion": "any",
   "RepoUrl": "https://github.com/VeroFess/ffxiv-priceinsight-cn",
   "Tags": [
@@ -24,7 +24,7 @@
     "https://raw.githubusercontent.com/VeroFess/ffxiv-priceinsight-cn/main/images/image2.png"
   ],
   "IconUrl": "https://raw.githubusercontent.com/VeroFess/ffxiv-priceinsight-cn/main/images/icon.png",
-  "Punchline": "(国区特供, 没有翻译) See item marketboard prices on hover!",
+  "Punchline": "(国区特供, 翻译完成, 解决了查价网站被*的问题) See item marketboard prices on hover!",
   "AcceptsFeedback": true,
   "DownloadLinkInstall": "https://github.com/VeroFess/ffxiv-priceinsight-cn/releases/latest/download/latest.zip",
   "DownloadLinkUpdate": "https://github.com/VeroFess/ffxiv-priceinsight-cn/releases/latest/download/latest.zip"
