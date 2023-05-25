@@ -27,5 +27,6 @@
   "Punchline": "(国区特供, 翻译完成, 解决了查价网站被*的问题) See item marketboard prices on hover!",
   "AcceptsFeedback": true,
   "DownloadLinkInstall": "https://github.com/VeroFess/ffxiv-priceinsight-cn/releases/latest/download/latest.zip",
-  "DownloadLinkUpdate": "https://github.com/VeroFess/ffxiv-priceinsight-cn/releases/latest/download/latest.zip"
+  "DownloadLinkUpdate": "https://github.com/VeroFess/ffxiv-priceinsight-cn/releases/latest/download/latest.zip",
+  "DownloadLinkTest": "https://github.com/VeroFess/ffxiv-priceinsight-cn/releases/latest/download/latest.zip"
 }
