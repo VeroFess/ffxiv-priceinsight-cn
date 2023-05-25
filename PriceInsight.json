@@ -1,8 +1,8 @@
 [
   {
     "Author": "Kouzukii",
-    "Name": "Price Insight",
-    "InternalName": "PriceInsight",
+    "Name": "Price Insight CN",
+    "InternalName": "PriceInsightCN",
     "AssemblyVersion": "2.4.0.0",
     "Description": "(国区特供, 翻译完成, 解决了查价网站被*的问题) Whenever you mouseover an item, it will show you the NQ/HQ marketboard prices at the bottom as well as the most recent purchase.\nPrices are retrieved from Universalis.app and cached for 90 minutes.\nTo refresh a price you can tap Alt while hovering over an item.\n",
     "ApplicableVersion": "any",
