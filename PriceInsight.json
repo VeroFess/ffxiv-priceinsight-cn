@@ -20,9 +20,10 @@
   "LoadSync": false,
   "LoadPriority": 0,
   "ImageUrls": [
-    "https://raw.githubusercontent.com/VeroFess/ffxiv-priceinsight-cn/master/PriceInsight/images/image1.png"
+    "https://raw.githubusercontent.com/VeroFess/ffxiv-priceinsight-cn/main/images/image1.png",
+    "https://raw.githubusercontent.com/VeroFess/ffxiv-priceinsight-cn/main/images/image2.png"
   ],
-  "IconUrl": "https://raw.githubusercontent.com/VeroFess/ffxiv-priceinsight-cn/master/PriceInsight/images/icon.png",
+  "IconUrl": "https://raw.githubusercontent.com/VeroFess/ffxiv-priceinsight-cn/main/images/icon.png",
   "Punchline": "(国区特供, 没有翻译) See item marketboard prices on hover!",
   "AcceptsFeedback": true,
   "DownloadLinkInstall": "https://github.com/VeroFess/ffxiv-priceinsight-cn/releases/latest/download/latest.zip",

@@ -14,7 +14,7 @@ public class ItemPriceLookup : IDisposable {
     private World? homeWorld;
     private readonly HashSet<uint> requestedItems = new();
     private DateTime lastRequest = DateTime.UnixEpoch;
-    private readonly Dictionary<byte, string> regions = new() { { 1, "Japan" }, { 2, "North-America" }, { 3, "Europe" }, { 4, "Oceania" } };
+    private readonly Dictionary<byte, string> regions = new() { { 1, "Japan" }, { 2, "North-America" }, { 3, "Europe" }, { 4, "Oceania" }, {5, "China" } };
 
     public ItemPriceLookup(PriceInsightPlugin plugin) {
         this.plugin = plugin;
