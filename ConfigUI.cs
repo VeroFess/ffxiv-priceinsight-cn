@@ -1,7 +1,7 @@
 ﻿using System;
 using ImGuiNET;
 
-namespace PriceInsight; 
+namespace PriceInsight;
 
 class ConfigUI : IDisposable {
     private readonly PriceInsightPlugin plugin;
@@ -13,51 +13,53 @@ class ConfigUI : IDisposable {
         set => settingsVisible = value;
     }
 
-    public ConfigUI(PriceInsightPlugin plugin) {
+    public ConfigUI(PriceInsightPlugin plugin)
+    {
         this.plugin = plugin;
     }
 
-    public void Dispose() {
+    public void Dispose()
+    {
     }
 
-    public void Draw() {
+    public void Draw()
+    {
         if (!SettingsVisible) {
             return;
         }
 
         var conf = plugin.Configuration;
-        if (ImGui.Begin("Price Insight Config", ref settingsVisible,
+        if (ImGui.Begin("Price Insight 设置", ref settingsVisible,
                 ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.AlwaysAutoResize)) {
             var configValue = conf.RefreshWithAlt;
-            if (ImGui.Checkbox("Tap Alt to refresh prices", ref configValue)) {
+            if (ImGui.Checkbox("点击 Alt 刷新价格", ref configValue)) {
                 conf.RefreshWithAlt = configValue;
                 conf.Save();
             }
-            
+
             configValue = conf.PrefetchInventory;
-            if (ImGui.Checkbox("Prefetch prices for items in inventory", ref configValue)) {
+            if (ImGui.Checkbox("预取库存项目的价格", ref configValue)) {
                 conf.PrefetchInventory = configValue;
                 conf.Save();
             }
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("Prefetch prices for all items in inventory, chocobo saddlebag and retainer when logging in.\nWARNING: Causes high network load with the \"Region\" setting enabled.");
+                ImGui.SetTooltip("登录时预取背包、陆行鸟鞍袋和雇员中所有物品的价格.\n警告: 启用 \"中国区\" 设置会导致高网络负载.");
 
             configValue = conf.UseCurrentWorld;
-            if (ImGui.Checkbox("Use current world as home world", ref configValue)) {
+            if (ImGui.Checkbox("将当前所在的服务器视为原始服务器", ref configValue)) {
                 conf.UseCurrentWorld = configValue;
                 conf.Save();
                 plugin.ClearCache();
             }
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("The current world you're on will be considered your \"home world\".\nUseful if you're datacenter travelling and want to see prices there.");
-
+                ImGui.SetTooltip("您所在的当前服务器将被视为您的\"原始服务器\".\n如果您正在跨服旅行并希望查看那里的价格，这很有用");
             ImGui.Separator();
             ImGui.PushID(0);
-            
-            ImGui.Text("Show cheapest price in:");
-            
+
+            ImGui.Text("显示以下范围内最便宜的价格:");
+
             configValue = conf.ShowRegion;
-            if (ImGui.Checkbox("Region", ref configValue)) {
+            if (ImGui.Checkbox("中国区", ref configValue)) {
                 conf.ShowRegion = configValue;
                 conf.Save();
                 plugin.ClearCache();
@@ -65,26 +67,26 @@ class ConfigUI : IDisposable {
             TooltipRegion();
 
             configValue = conf.ShowDatacenter;
-            if (ImGui.Checkbox("Datacenter", ref configValue)) {
+            if (ImGui.Checkbox("大区", ref configValue)) {
                 conf.ShowDatacenter = configValue;
                 conf.Save();
                 plugin.ClearCache();
             }
 
             configValue = conf.ShowWorld;
-            if (ImGui.Checkbox("Home world", ref configValue)) {
+            if (ImGui.Checkbox("原始服务器", ref configValue)) {
                 conf.ShowWorld = configValue;
                 conf.Save();
             }
-            
+
             ImGui.PopID();
             ImGui.Separator();
             ImGui.PushID(1);
-            
-            ImGui.Text("Show most recent purchase in:");
+
+            ImGui.Text("显示以下范围的数据:");
 
             configValue = conf.ShowMostRecentPurchaseRegion;
-            if (ImGui.Checkbox("Region", ref configValue)) {
+            if (ImGui.Checkbox("中国区", ref configValue)) {
                 conf.ShowMostRecentPurchaseRegion = configValue;
                 conf.Save();
                 plugin.ClearCache();
@@ -92,43 +94,44 @@ class ConfigUI : IDisposable {
             TooltipRegion();
 
             configValue = conf.ShowMostRecentPurchase;
-            if (ImGui.Checkbox("Datacenter", ref configValue)) {
+            if (ImGui.Checkbox("大区", ref configValue)) {
                 conf.ShowMostRecentPurchase = configValue;
                 conf.Save();
                 plugin.ClearCache();
             }
 
             configValue = conf.ShowMostRecentPurchaseWorld;
-            if (ImGui.Checkbox("Home world", ref configValue)) {
+            if (ImGui.Checkbox("原始服务器", ref configValue)) {
                 conf.ShowMostRecentPurchaseWorld = configValue;
                 conf.Save();
             }
-            
+
             ImGui.PopID();
             ImGui.Separator();
-            
+
             configValue = conf.ShowDailySaleVelocity;
-            if (ImGui.Checkbox("Show sales per day", ref configValue)) {
+            if (ImGui.Checkbox("显示每天的销售额", ref configValue)) {
                 conf.ShowDailySaleVelocity = configValue;
                 conf.Save();
             }
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("Show the average sales per day based on the last 20 purchases.");
+                ImGui.SetTooltip("根据最近 20 次购买显示每天的平均销售额。");
 
             configValue = conf.ShowAverageSalePrice;
-            if (ImGui.Checkbox("Show average sale price", ref configValue)) {
+            if (ImGui.Checkbox("显示平均售价", ref configValue)) {
                 conf.ShowAverageSalePrice = configValue;
                 conf.Save();
             }
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("Show the average sale price based on the last 20 purchases.");
+                ImGui.SetTooltip("显示基于最近 20 次购买的平均销售价格。");
         }
 
         ImGui.End();
     }
 
-    private static void TooltipRegion() {
+    private static void TooltipRegion()
+    {
         if (ImGui.IsItemHovered())
-            ImGui.SetTooltip("Include all datacenters available via datacenter traveling.");
+            ImGui.SetTooltip("显示整个国区的数据... 虽然我不知道有啥用但是还是放在这里");
     }
 }

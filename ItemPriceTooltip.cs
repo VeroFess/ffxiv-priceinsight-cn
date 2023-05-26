@@ -123,12 +123,12 @@ public class ItemPriceTooltip : IDisposable {
         if (lookupState == LookupState.Faulted) {
             payloads.Add(new UIForegroundPayload(20));
             payloads.Add(new IconPayload(BitmapFontIcon.Warning));
-            payloads.Add(new TextPayload(" Failed to obtain marketboard info.\n        This is likely an issue with Universalis.\n        Press alt to retry or check the /xllog."));
+            payloads.Add(new TextPayload(" 获取市场信息失败.\n        这可能是 Universalis 的问题.\n        按 alt 重试或检查 /xllog."));
             payloads.Add(new UIForegroundPayload(0));
         } else if (mbData == null) {
             payloads.Add(new UIForegroundPayload(20));
             payloads.Add(new IconPayload(BitmapFontIcon.LevelSync));
-            payloads.Add(new TextPayload(" Marketboard info is being obtained.."));
+            payloads.Add(new TextPayload(" 正在获取市场信息.."));
             payloads.Add(new UIForegroundPayload(0));
         } else {
             var ownWorld = mbData.HomeWorld;
@@ -143,7 +143,7 @@ public class ItemPriceTooltip : IDisposable {
             var priceHeader = false;
             void PriceHeader() {
                 if (priceHeader) return;
-                payloads.Add(new TextPayload("Marketboard Price:"));
+                payloads.Add(new TextPayload("市场价格:"));
                 priceHeader = true;
             }
 
@@ -180,7 +180,7 @@ public class ItemPriceTooltip : IDisposable {
                     ? mbData.RegionMinimumPriceHQ?.World ?? mbData.RegionMinimumPriceNQ?.World 
                     : mbData.RegionMinimumPriceNQ?.World ?? mbData.RegionMinimumPriceHQ?.World;
 
-                payloads.Add(new TextPayload("\n  Cheapest ("));
+                payloads.Add(new TextPayload("\n  最低 ("));
                 payloads.Add(new IconPayload(BitmapFontIcon.CrossWorld));
                 payloads.Add(new TextPayload($"{minWorldRegion} {minDc}): "));
                 PrintNqHq(mbData.RegionMinimumPriceNQ?.Price, mbData.RegionMinimumPriceHQ?.Price);
@@ -192,7 +192,7 @@ public class ItemPriceTooltip : IDisposable {
             if (minWorld != ownWorld && (plugin.Configuration.ShowDatacenter || (plugin.Configuration.ShowRegion && minDc == ownDc))) {
                 PriceHeader();
 
-                payloads.Add(new TextPayload("\n  Cheapest ("));
+                payloads.Add(new TextPayload("\n  最低 ("));
                 payloads.Add(new IconPayload(BitmapFontIcon.CrossWorld));
                 payloads.Add(new TextPayload($"{minWorld}): "));
                 PrintNqHq(mbData.MinimumPriceNQ?.Price, mbData.MinimumPriceHQ?.Price);
@@ -204,7 +204,7 @@ public class ItemPriceTooltip : IDisposable {
             if ((mbData.OwnMinimumPriceHQ != null || mbData.OwnMinimumPriceNQ != null) && (plugin.Configuration.ShowWorld || (plugin.Configuration.ShowDatacenter && minWorld == ownWorld))) {
                 PriceHeader();
                 
-                payloads.Add(new TextPayload($"\n  Home ({ownWorld}): "));
+                payloads.Add(new TextPayload($"\n  原始服务器 ({ownWorld}): "));
                 PrintNqHq( mbData.OwnMinimumPriceNQ?.Price, mbData.OwnMinimumPriceHQ?.Price);
 
                 var recentTime = hq ? mbData.OwnMinimumPriceHQ?.Time : mbData.OwnMinimumPriceNQ?.Time;
@@ -216,7 +216,7 @@ public class ItemPriceTooltip : IDisposable {
                 if (recentHeader) return;
                 if (payloads.Count > 0)
                     payloads.Add(new TextPayload("\n"));
-                payloads.Add(new TextPayload("Most Recent Purchase:"));
+                payloads.Add(new TextPayload("近期交易:"));
                 recentHeader = true;
             }
             
@@ -229,7 +229,7 @@ public class ItemPriceTooltip : IDisposable {
                     ? mbData.RegionMostRecentPurchaseHQ?.World ?? mbData.RegionMostRecentPurchaseNQ?.World
                     : mbData.RegionMostRecentPurchaseNQ?.World ?? mbData.RegionMostRecentPurchaseHQ?.World;
 
-                payloads.Add(new TextPayload("\n  Cheapest ("));
+                payloads.Add(new TextPayload("\n  最低 ("));
                 payloads.Add(new IconPayload(BitmapFontIcon.CrossWorld));
                 payloads.Add(new TextPayload($"{recentWorldRegion} {recentDc}): "));
                 PrintNqHq(mbData.RegionMostRecentPurchaseNQ?.Price, mbData.RegionMostRecentPurchaseHQ?.Price);
@@ -241,7 +241,7 @@ public class ItemPriceTooltip : IDisposable {
             if (recentWorld != null && recentWorld != ownWorld && (plugin.Configuration.ShowMostRecentPurchase || (plugin.Configuration.ShowMostRecentPurchaseRegion && recentDc == ownDc))) {
                 RecentHeader();
 
-                payloads.Add(new TextPayload("\n  Cheapest ("));
+                payloads.Add(new TextPayload("\n  最低 ("));
                 payloads.Add(new IconPayload(BitmapFontIcon.CrossWorld));
                 payloads.Add(new TextPayload($"{recentWorld}): "));
                 PrintNqHq(mbData.MostRecentPurchaseNQ?.Price, mbData.MostRecentPurchaseHQ?.Price);
@@ -254,7 +254,7 @@ public class ItemPriceTooltip : IDisposable {
                 && (plugin.Configuration.ShowMostRecentPurchaseWorld || (plugin.Configuration.ShowMostRecentPurchase && recentWorld == ownWorld))) {
                 RecentHeader();
 
-                payloads.Add(new TextPayload($"\n  Home ({ownWorld}): "));
+                payloads.Add(new TextPayload($"\n  原始服务器 ({ownWorld}): "));
                 PrintNqHq(mbData.OwnMostRecentPurchaseNQ?.Price, mbData.OwnMostRecentPurchaseHQ?.Price);
 
                 var recentTime = hq ? mbData.OwnMostRecentPurchaseHQ?.Time : mbData.OwnMostRecentPurchaseNQ?.Time;
@@ -264,14 +264,14 @@ public class ItemPriceTooltip : IDisposable {
             if ((mbData.AverageSalePriceNQ != null || mbData.AverageSalePriceHQ != null) && plugin.Configuration.ShowAverageSalePrice) {
                 if (payloads.Count > 0)
                     payloads.Add(new TextPayload("\n"));
-                payloads.Add(new TextPayload($"Average sale price ({mbData.Scope}): "));
+                payloads.Add(new TextPayload($"平均售价 ({mbData.Scope}): "));
                 PrintNqHq(mbData.AverageSalePriceNQ, mbData.AverageSalePriceHQ);
             }
 
             if ((mbData.DailySaleVelocityNQ != null || mbData.DailySaleVelocityHQ != null) && plugin.Configuration.ShowDailySaleVelocity) {
                 if (payloads.Count > 0)
                     payloads.Add(new TextPayload("\n"));
-                payloads.Add(new TextPayload($"Sales per day ({mbData.Scope}): "));
+                payloads.Add(new TextPayload($"平均每日售出 ({mbData.Scope}): "));
                 PrintNqHq(mbData.DailySaleVelocityNQ, mbData.DailySaleVelocityHQ, "N1", false);
             }
         }
@@ -344,12 +344,12 @@ public class ItemPriceTooltip : IDisposable {
 
     private static string PrintDuration(TimeSpan span) {
         if (span.Days > 0)
-            return $"{span.Days}d ago";
+            return $"{span.Days} 天之前";
         if (span.Hours > 0)
-            return $"{span.Hours}h ago";
+            return $"{span.Hours} 小时之前";
         if (span.Minutes > 0)
-            return $"{span.Minutes}m ago";
-        return "just now";
+            return $"{span.Minutes} 分钟之前";
+        return "刚刚";
     }
 
     public void Dispose() {
