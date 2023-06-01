@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ImGuiNET;
 
 namespace PriceInsight;
@@ -124,6 +124,14 @@ class ConfigUI : IDisposable {
             }
             if (ImGui.IsItemHovered())
                 ImGui.SetTooltip("显示基于最近 20 次购买的平均销售价格。");
+            
+            configValue = conf.ShowStackSalePrice;
+            if (ImGui.Checkbox("显示合计价格", ref configValue)) {
+                conf.ShowStackSalePrice = configValue;
+                conf.Save();
+            }
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip("显示悬停物品如果以给定的单价出售的情况下合计的价格(单价 x 数量)。");
         }
 
         ImGui.End();
