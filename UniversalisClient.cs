@@ -29,7 +29,7 @@ public sealed class UniversalisClient : IDisposable {
 
     public async Task<MarketBoardData?> GetMarketBoardData(string scope, uint homeWorldId, ulong itemId) {
         try {
-            using var result = await httpClient.GetAsync($"https://universalis.app/api/v2/{scope}/{itemId}?fields={RequiredFields}");
+            using var result = await httpClient.GetAsync($"https://universalis-api.binklac.cn/v2/{scope}/{itemId}?fields={RequiredFields}");
             
             if (result.StatusCode != HttpStatusCode.OK) {
                 throw new HttpRequestException("Invalid status code " + result.StatusCode, null, result.StatusCode);
@@ -57,7 +57,7 @@ public sealed class UniversalisClient : IDisposable {
         }
 
         try {
-            using var result = await httpClient.GetAsync($"http://api.universalis.binklac.cn/v2/{scope}/{string.Join(',', itemId.Select(i => i.ToString()))}?fields={RequiredFieldsMulti}");
+            using var result = await httpClient.GetAsync($"https://universalis-api.binklac.cn/v2/{scope}/{string.Join(',', itemId.Select(i => i.ToString()))}?fields={RequiredFieldsMulti}");
 
             if (result.StatusCode != HttpStatusCode.OK) {
                 throw new HttpRequestException("Invalid status code " + result.StatusCode, null, result.StatusCode);
