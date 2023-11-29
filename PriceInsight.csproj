@@ -36,7 +36,7 @@
 
 	<!-- Dalamud Configuration -->
 	<PropertyGroup>
-		<DalamudLibPath>D:\Games\FFXIV\Roaming\addon\Hooks\dev\</DalamudLibPath>
+		<DalamudLibPath>E:\Program Files (x86)\Dalamud.Updater.exe_v1.0.4.4\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
 	</PropertyGroup>
 
 	<!-- Assembly Reference Locations -->
@@ -67,7 +67,7 @@
 
 	<!-- NuGet Packages -->
 	<ItemGroup>
-		<PackageReference Include="DalamudPackager" Version="2.1.12" />
+		<PackageReference Include="DalamudPackager" Version="2.1.10" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Runtime.Caching" Version="7.0.0" />

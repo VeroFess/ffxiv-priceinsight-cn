@@ -3,3 +3,4 @@
 obj/
 bin/
 *.user
+.cr/personal/FavoritesList/List.xml
