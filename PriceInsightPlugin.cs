@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dalamud.Game;
 using Dalamud.Game.Command;
-using Dalamud.Logging;
 using Dalamud.Plugin;
+using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace PriceInsight;
 
 public class PriceInsightPlugin : IDalamudPlugin {
-    public string Name => "PriceInsight";
-
     public Configuration Configuration { get; }
     public ItemPriceTooltip ItemPriceTooltip { get; }
     public Hooks Hooks { get; }
@@ -53,11 +50,7 @@ public class PriceInsightPlugin : IDalamudPlugin {
         pluginInterface.UiBuilder.Draw += () => configUi.Draw();
         pluginInterface.UiBuilder.OpenConfigUi += OpenConfigUI;
         Service.Framework.Update += FrameworkOnUpdate;
-        Service.ClientState.Logout += ClientStateOnLogout;
-    }
-
-    private void ClientStateOnLogout(object? sender, EventArgs e) {
-        ClearCache();
+        Service.ClientState.Logout += ClearCache;
     }
 
     public void ClearCache() {
@@ -69,7 +62,7 @@ public class PriceInsightPlugin : IDalamudPlugin {
         ipl.Dispose();
     }
 
-    private void FrameworkOnUpdate(Framework framework) {
+    private void FrameworkOnUpdate(IFramework framework) {
         if (ItemPriceLookup.NeedsClearing)
             ClearCache();
         if (Service.ClientState.LocalContentId == 0 || !ItemPriceLookup.IsReady)
@@ -86,16 +79,16 @@ public class PriceInsightPlugin : IDalamudPlugin {
                     var container = manager->GetInventoryContainer(type);
                     if (container == null || container->Loaded == 0)
                         continue;
-                    var emptyItems = 0;
+                    var empty = true;
                     for (var i = 0; i < container->Size; i++) {
                         var item = &container->Items[i];
                         var itemId = item->ItemID;
                         if (itemId == 0) {
-                            emptyItems++;
                             continue;
                         }
 
                         items.Add(itemId % 500000);
+                        empty = false;
 
                         if (items.Count >= 50) {
                             ItemPriceLookup.Fetch(items, false);
@@ -103,7 +96,7 @@ public class PriceInsightPlugin : IDalamudPlugin {
                         }
                     }
 
-                    if (emptyItems == container->Size) {
+                    if (empty) {
                         // The inventory was completely empty (retainer and companion inventory are empty before they're loaded)
                         inventoriesToScan[type] = DateTime.Now.AddSeconds(-59 * 60 + 10);
                         continue;
@@ -117,7 +110,7 @@ public class PriceInsightPlugin : IDalamudPlugin {
                 }
             }
         } catch (Exception e) {
-            PluginLog.Log(e, "Failed to process update");
+            Service.PluginLog.Error(e, "Failed to process update");
         }
     }
 
@@ -128,7 +121,7 @@ public class PriceInsightPlugin : IDalamudPlugin {
     public void Dispose() {
         Service.CommandManager.RemoveHandler("/priceinsight");
         Service.Framework.Update -= FrameworkOnUpdate;
-        Service.ClientState.Logout -= ClientStateOnLogout;
+        Service.ClientState.Logout -= ClearCache;
         Hooks.Dispose();
         ItemPriceTooltip.Dispose();
         ItemPriceLookup.Dispose();

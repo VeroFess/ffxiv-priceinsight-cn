@@ -132,6 +132,30 @@ class ConfigUI : IDisposable {
             }
             if (ImGui.IsItemHovered())
                 ImGui.SetTooltip("显示悬停物品如果以给定的单价出售的情况下合计的价格(单价 x 数量)。");
+            
+            configValue = conf.ShowAge;
+            if (ImGui.Checkbox("显示刷新时间", ref configValue)) {
+                conf.ShowAge = configValue;
+                conf.Save();
+            }
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip("显示价格信息上次刷新的时间.\n可以关闭以使提示更加简洁.");
+            
+            configValue = conf.ShowDatacenterOnCrossWorlds;
+            if (ImGui.Checkbox("Show datacenter for foreign worlds", ref configValue)) {
+                conf.ShowDatacenterOnCrossWorlds = configValue;
+                conf.Save();
+            }
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip("Show the datacenter for worlds from other datacenters when displaying prices for the entire region.\nCan be turned off to reduce tooltip bloat.");
+            
+            configValue = conf.ShowBothNqAndHq;
+            if (ImGui.Checkbox("总是显示 HQ 与 NQ 的价格", ref configValue)) {
+                conf.ShowBothNqAndHq = configValue;
+                conf.Save();
+            }
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip("显示商品的 NQ 和 HQ 价格.\n关闭时将仅显示当前质量的价格（使用 Ctrl 在 NQ 和 HQ 之间切换）");
         }
 
         ImGui.End();
