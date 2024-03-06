@@ -16,7 +16,7 @@
     "ui",
     "utility"
   ],
-  "DalamudApiLevel": 8,
+  "DalamudApiLevel": 9,
   "LoadRequiredState": 0,
   "LoadSync": false,
   "LoadPriority": 0,
