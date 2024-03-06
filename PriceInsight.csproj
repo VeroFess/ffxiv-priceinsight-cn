@@ -6,12 +6,13 @@
 		<LangVersion>latest</LangVersion>
 		<Platforms>x64</Platforms>
 		<Configurations>Debug;Release</Configurations>
+		<LangVersion>11</LangVersion>
 	</PropertyGroup>
 
 	<!-- Assembly Configuration -->
 	<PropertyGroup>
 		<AssemblyName>PriceInsightCN</AssemblyName>
-		<Version>2.6.1.1</Version>
+		<Version>2.8.0.0</Version>
 	</PropertyGroup>
 
 	<!-- Build Configuration -->
@@ -68,9 +69,7 @@
 	<!-- NuGet Packages -->
 	<ItemGroup>
 		<PackageReference Include="DalamudPackager" Version="2.1.12" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
 	</ItemGroup>
 	
 	<ItemGroup>

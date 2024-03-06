@@ -53,6 +53,16 @@ class ConfigUI : IDisposable {
             }
             if (ImGui.IsItemHovered())
                 ImGui.SetTooltip("您所在的当前服务器将被视为您的\"原始服务器\".\n如果您正在跨服旅行并希望查看那里的价格，这很有用");
+
+            configValue = conf.ForceIpv4;
+            if (ImGui.Checkbox("强制使用 IP v4 进行查询", ref configValue)) {
+                conf.ForceIpv4 = configValue;
+                conf.Save();
+                plugin.UniversalisClient.ForceIpv4(configValue);
+            }
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip("用来缓解某些情况下使用 IPv6 体验不佳的问题");
+
             ImGui.Separator();
             ImGui.PushID(0);
 
