@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using Dalamud.Game.Command;
 using Dalamud.Plugin;
-using Dalamud.Game;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game;
-using System.Reflection;
 
 namespace PriceInsight;
 
 public class PriceInsightPlugin : IDalamudPlugin {
-    public string Name { get; set; } = null!;
     public Configuration Configuration { get; }
     public ItemPriceTooltip ItemPriceTooltip { get; }
     public Hooks Hooks { get; }
@@ -56,7 +53,7 @@ public class PriceInsightPlugin : IDalamudPlugin {
         Service.ClientState.Logout += ClearCache;
     }
 
-    public void ClearCache(object? sender, EventArgs e) {
+    public void ClearCache() {
         foreach (var key in inventoriesToScan.Keys) {
             inventoriesToScan[key] = DateTime.UnixEpoch;
         }
@@ -65,9 +62,9 @@ public class PriceInsightPlugin : IDalamudPlugin {
         ipl.Dispose();
     }
 
-    private void FrameworkOnUpdate(Framework framework) {
+    private void FrameworkOnUpdate(IFramework framework) {
         if (ItemPriceLookup.NeedsClearing)
-            ClearCache(null, EventArgs.Empty);
+            ClearCache();
         if (Service.ClientState.LocalContentId == 0 || !ItemPriceLookup.IsReady)
             return;
         if(!Configuration.PrefetchInventory) 

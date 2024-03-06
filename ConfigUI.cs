@@ -49,7 +49,7 @@ class ConfigUI : IDisposable {
             if (ImGui.Checkbox("将当前所在的服务器视为原始服务器", ref configValue)) {
                 conf.UseCurrentWorld = configValue;
                 conf.Save();
-                plugin.ClearCache(null, EventArgs.Empty);
+                plugin.ClearCache();
             }
             if (ImGui.IsItemHovered())
                 ImGui.SetTooltip("您所在的当前服务器将被视为您的\"原始服务器\".\n如果您正在跨服旅行并希望查看那里的价格，这很有用");
@@ -62,7 +62,7 @@ class ConfigUI : IDisposable {
             if (ImGui.Checkbox("中国区", ref configValue)) {
                 conf.ShowRegion = configValue;
                 conf.Save();
-                plugin.ClearCache(null, EventArgs.Empty);
+                plugin.ClearCache();
             }
             TooltipRegion();
 
@@ -70,7 +70,7 @@ class ConfigUI : IDisposable {
             if (ImGui.Checkbox("大区", ref configValue)) {
                 conf.ShowDatacenter = configValue;
                 conf.Save();
-                plugin.ClearCache(null, EventArgs.Empty);
+                plugin.ClearCache();
             }
 
             configValue = conf.ShowWorld;
@@ -89,7 +89,7 @@ class ConfigUI : IDisposable {
             if (ImGui.Checkbox("中国区", ref configValue)) {
                 conf.ShowMostRecentPurchaseRegion = configValue;
                 conf.Save();
-                plugin.ClearCache(null, EventArgs.Empty);
+                plugin.ClearCache();
             }
             TooltipRegion();
 
@@ -97,7 +97,7 @@ class ConfigUI : IDisposable {
             if (ImGui.Checkbox("大区", ref configValue)) {
                 conf.ShowMostRecentPurchase = configValue;
                 conf.Save();
-                plugin.ClearCache(null, EventArgs.Empty);
+                plugin.ClearCache();
             }
 
             configValue = conf.ShowMostRecentPurchaseWorld;

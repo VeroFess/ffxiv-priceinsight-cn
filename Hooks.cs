@@ -1,5 +1,5 @@
 using System;
-using Dalamud.Game.AddonLifecycle;
+using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Hooking;
 using Dalamud.Utility.Signatures;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -19,7 +19,7 @@ public class Hooks : IDisposable {
 
     public unsafe Hooks(PriceInsightPlugin plugin) {
         this.plugin = plugin;
-        SignatureHelper.Initialise(this);
+        Service.GameInteropProvider.InitializeFromAttributes(this);
         agentItemDetailOnItemHovered.Enable();
         Service.AddonLifecycle.RegisterListener(AddonEvent.PreRequestedUpdate, "ItemDetail", (_, args) => ItemPriceTooltip.RestoreToNormal((AtkUnitBase*)args.Addon));
         Service.AddonLifecycle.RegisterListener(AddonEvent.PostRequestedUpdate, "ItemDetail", (_, args) => plugin.ItemPriceTooltip.OnItemTooltip((AtkUnitBase*)args.Addon));
